@@ -43,7 +43,7 @@ const TopBuses = async (req, res) => {
             return res.status(404).json({ message: 'No data found' });
         }
 
-        res.json(result.rows);
+        res.json(result.rows)
     } catch (err) {
         console.error('Error fetching data', err);
         res.status(500).json({ message: 'Error fetching data' });
@@ -71,7 +71,7 @@ const updateBusRoutes = async (req, res) => {
              SET from_id = $1, "from" = $2, to_id = $3, "to" = $4, image = COALESCE($5, image), bus_count = $6
              WHERE id = $7 RETURNING *`,
             [from_id, from, to_id, to, imageurl, bus_count, id]
-        );
+        )
 
         if (result.rows.length === 0) {
             res.status(404).json({ message: 'Bus route not found' });

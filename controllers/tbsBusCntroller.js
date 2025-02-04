@@ -347,7 +347,6 @@ const updateBusInfoStatus = async (busInfo) => {
     for (const bus of busInfo) {
       await abhiBusPool.query(`UPDATE static_data_details SET processed = TRUE WHERE "Bus_id" = $1`, [bus.Bus_id]);
     }
-    //console.log('Bus info status updated successfully');
   } catch (err) {
     console.error('Error updating bus info status:', err);
   }
@@ -355,7 +354,6 @@ const updateBusInfoStatus = async (busInfo) => {
 
 const processBusInfo = async () => {
   try {
-   // console.log('Polling for updates...');
     const busInfo = await fetchAbhiBusInfo();
     await upsertBusInfo(busInfo);
     await updateBusInfoStatus(busInfo);
