@@ -1,6 +1,8 @@
 const express = require('express')
 const { passengerPost, passengerPut, passengerDelete, passengerGetById, passengerGetAll, addpassengerPost, addpassengerPut, addpassengerDelete, addpassengerGetAll, addpassengerGetById, AllpassengerSGetById, passengerReferrelCodeGetById, getEmail, getEmailByID, SearchEmail } = require('../controllers/passengerController')
 
+const { authenticateToken } = require('../middileware/Auth')
+
 const passengerRouter = express.Router()
 
 passengerRouter.post('/passenger-details', passengerPost)
@@ -9,7 +11,7 @@ passengerRouter.delete('/passenger-details/:tbs_passenger_id', passengerDelete)
 passengerRouter.get('/passenger-details', passengerGetAll)
 passengerRouter.get('/passenger-details/:tbs_passenger_id', passengerGetById)
 
-passengerRouter.post('/add-passenger-details', addpassengerPost)
+passengerRouter.post('/add-passenger-details', authenticateToken,  addpassengerPost)
 passengerRouter.put('/add-passenger-details/:tbs_add_pax_id', addpassengerPut)
 passengerRouter.delete('/add-passenger-details/:tbs_add_pax_id', addpassengerDelete)
 passengerRouter.get('/add-passenger-details', addpassengerGetAll)
