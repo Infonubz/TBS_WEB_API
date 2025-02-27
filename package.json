@@ -1,0 +1,30 @@
+{
+  "name": "tbs_web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Anukrishna",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "list": "^2.0.19",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.47",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.4",
+    "pg": "^8.12.0",
+    "puppeteer": "^24.2.0",
+    "puppeteer-core": "^24.2.0",
+    "razorpay": "^2.9.5",
+    "xlsx": "^0.18.5"
+  }
+}
