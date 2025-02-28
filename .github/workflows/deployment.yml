@@ -1,0 +1,43 @@
+name: CI/CD Pipeline for EC2
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}   << 'EOF'
+            docker pull ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
+            docker stop tbs_web_api_new_28 || true
+            docker rm tbs_web_api_new_28 || true
+            docker run -d -p 4005:4001 --name tbs_web_api_new_28 ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
+          EOF
