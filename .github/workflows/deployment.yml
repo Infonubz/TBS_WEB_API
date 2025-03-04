@@ -21,9 +21,9 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-            docker pull ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
-            docker stop tbs_web_api_new_28 || true
-            docker rm tbs_web_api_new_28 || true
-            docker run -d -p 4005:4001 --name tbs_web_api_new_28 ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/04_tbs_web_api:latest
+            docker stop 04_tbs_web_api || true
+            docker rm 04_tbs_web_api || true
+            docker run -d -p 4005:4001 --name 04_tbs_web_api ${{ secrets.DOCKER_USERNAME }}/04_tbs_web_api:latest
           EOF
           
