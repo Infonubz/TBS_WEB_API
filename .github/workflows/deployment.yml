@@ -24,6 +24,6 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
             docker stop tbs_web_api_new_28 || true
             docker rm tbs_web_api_new_28 || true
-            docker run -d -p 4005:4001 --name web_live_28 ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
+            docker run -d -p 4005:4001 --name tbs_web_api_new_28 ${{ secrets.DOCKER_USERNAME }}/tbs_web_api_new_28:latest
           EOF
           
