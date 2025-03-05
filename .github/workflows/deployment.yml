@@ -25,5 +25,5 @@ jobs:
             docker stop 04_tbs_web_api || true
             docker rm 04_tbs_web_api || true
             docker run -d -p 4005:4001 --name 04_tbs_web_api ${{ secrets.DOCKER_USERNAME }}/04_tbs_web_api:latest
-          EOF
+          EOF 
           
